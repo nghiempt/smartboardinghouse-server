@@ -6,36 +6,39 @@ user = APIRouter()
 
 
 @user.get('/')
-async def read_data():
-    return conn.execute(users.select()).fetchall()
+async def get_all_users():
+    return User.serializeList(conn.execute(users.select()).fetchall())
 
 
 @user.get('/{id}')
-async def read_data(id: int):
-    return conn.execute(users.select().where(users.c.id == id)).fetchone()
+async def get_one_user(id: int):
+    return User.serializeDict(conn.execute(users.select().where(users.c.id == id)).fetchone())
 
 
 @user.post('/')
-async def write_data(user: User):
+async def create_user(user: User):
     conn.execute(users.insert().values(
         name=user.name,
         email=user.email,
         password=user.password,
     ))
-    return conn.execute(users.select()).fetchall()
+    conn.commit()
+    return User.serializeList(conn.execute(users.select()).fetchall())
 
 
 @user.put('/{id}')
-async def update_data(id: int, user: User):
+async def update_user(id: int, user: User):
     conn.execute(users.update().values(
         name=user.name,
         email=user.email,
         password=user.password,
     ).where(users.c.id == id))
-    return conn.execute(users.select()).fetchall()
+    conn.commit
+    return User.serializeList(conn.execute(users.select()).fetchall())
 
 
 @user.delete('/{id}')
-async def delete_data(id, user: User):
+async def delete_user(id: int):
     conn.execute(users.delete().where(users.c.id == id))
-    return conn.execute(users.select()).fetchall()
+    conn.commit()
+    return User.serializeList(conn.execute(users.select()).fetchall())
