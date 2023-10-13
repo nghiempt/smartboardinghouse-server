@@ -56,20 +56,37 @@
 
 ## How To Use
 
-To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
+To clone and run this application, you'll need [Git](https://git-scm.com) and [Visual Studio Code](https://code.visualstudio.com/Download). From your command line:
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/amitmerchant1990/electron-markdownify
+$ git clone https://github.com/nghiempt/sbh-apis.git
 
 # Go into the repository
-$ cd electron-markdownify
+$ cd sbh-apis
 
-# Install dependencies
-$ npm install
+# Setup env
+$ virtualenv venv
 
-# Run the app
-$ npm start
+# For Linux/Mac
+
+$ source venv/bin/activate
+
+
+# For Windows
+
+
+$ source venv/Scripts/activate
+
+
+# Install package
+
+$ pip install fastapi sqlalchemy pymysql uvicorn
+
+# Start server
+
+$ uvicorn index:app --reload
+
 ```
 
 > **Note**
