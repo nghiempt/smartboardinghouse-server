@@ -4,7 +4,7 @@ from pydantic import BaseModel
 class Account(BaseModel):
     username: str
     password: str
-    role: str
+    role: int
     key: str
 
     def serializeList(list):

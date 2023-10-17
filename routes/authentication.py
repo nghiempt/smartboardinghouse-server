@@ -1,7 +1,8 @@
-from fastapi import APIRouter, HTTPException
-from models.account import account
+from fastapi import APIRouter
+from models._index import account, ResponseObject
 from config.db import conn
-from schemas.index import Login
+from schemas._index import Login
+import http.client as HTTP_STATUS_CODE
 
 loginRouter = APIRouter()
 
@@ -15,7 +16,10 @@ async def login(user_credentials: Login):
 
     if user is None:
         # Return an error response if the credentials are invalid
-        raise HTTPException(status_code=401, detail="Invalid username and/or password")
+        status_code = HTTP_STATUS_CODE.UNAUTHORIZED
+        status_message = HTTP_STATUS_CODE.responses[status_code]
+        return ResponseObject(False, status_code, status_message, "Invalid Username and/or Password")
 
-    return {"message": "Login successful",
-            "role": user.role}
+    status_code = HTTP_STATUS_CODE.OK
+    status_message = HTTP_STATUS_CODE.responses[status_code]
+    return ResponseObject(True, status_code, status_message, "Login Successful")

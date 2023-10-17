@@ -4,5 +4,3 @@ engine = create_engine(
     "mysql+pymysql://root@localhost:3306/fastapi_mysql", echo=True)
 meta = MetaData()
 conn = engine.connect()
-
-meta.create_all(engine)
