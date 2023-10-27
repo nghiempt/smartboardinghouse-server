@@ -4,7 +4,7 @@ from config.db import conn
 from schemas._index import Login
 import http.client as HTTP_STATUS_CODE
 
-loginRouter = APIRouter()
+loginRouter = APIRouter(prefix="/api/v1")
 
 @loginRouter.post('/login')
 async def login(user_credentials: Login):

@@ -9,5 +9,5 @@ room = Table(
     Column('price', Float),
     Column('max_people', Integer),
     Column('status', Integer),
-    Column('houseID', Integer, ForeignKey('boarding_house.ID'))
+    Column('house_id', Integer, ForeignKey('boarding_house.ID'))
 )

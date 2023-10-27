@@ -3,7 +3,7 @@ from models._index import account, ResponseObject
 from config.db import conn
 from schemas._index import Account
 import http.client as HTTP_STATUS_CODE
-accountRouter = APIRouter()
+accountRouter = APIRouter(prefix="/api/v1")
 
 
 @accountRouter.get('/')
