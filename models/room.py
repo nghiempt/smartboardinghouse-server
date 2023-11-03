@@ -3,11 +3,11 @@ from sqlalchemy.sql.sqltypes import Integer, Float
 from config.db import meta
 
 room = Table(
-    'room', meta,
+    'sbh_apis_room', meta,
     Column('ID', Integer, primary_key=True, autoincrement=True),
+    Column('room_number', Integer),
     Column('area', Float),
-    Column('price', Float),
     Column('max_people', Integer),
     Column('status', Integer),
-    Column('house_id', Integer, ForeignKey('boarding_house.ID'))
+    Column('house_id', Integer, ForeignKey('sbh_apis_boarding_house.ID'))
 )

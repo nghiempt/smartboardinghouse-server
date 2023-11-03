@@ -3,11 +3,11 @@ from sqlalchemy.sql.sqltypes import Integer, String
 from config.db import meta, engine
 
 post = Table(
-    'post', meta,
+    'sbh_apis_post', meta,
     Column('ID', Integer, primary_key=True),
     Column('title', String(255)),
     Column('content', String(255)),
     Column('location', String(255)),
     Column('image', String(255)),
-    Column('account_id', Integer, ForeignKey('account.id'))
+    Column('account_id', Integer, ForeignKey('sbh_apis_account.id'))
 )
