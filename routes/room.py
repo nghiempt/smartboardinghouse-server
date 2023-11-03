@@ -21,6 +21,21 @@ async def get_rooms_by_houseID(house_id: int = Query(..., description="House ID 
 
     return ResponseObject(True, status_code, status_message, Room.serializeList(rooms))
 
+@roomRouter.get('/room/{room_id}')
+async def get_room_by_id(room_id: int):
+    # Query the database to get rooms that match the specified room_id
+    room = conn.execute(room.select().where(room.c.ID == room_id)).fetchone()
+
+    status_code = HTTP_STATUS_CODE.OK
+    status_message = HTTP_STATUS_CODE.responses[status_code]
+
+    if not room:
+        status_code = HTTP_STATUS_CODE.NOT_FOUND
+        status_message = HTTP_STATUS_CODE.responses[status_code]
+        return ResponseObject(False,status_code, status_message, "No room found")
+
+    return ResponseObject(True, status_code, status_message, Room.serializeDict(room))
+
 @roomRouter.post('/room/create')
 async def create_room(roomInput: Room):
     # Insert the new room into the database
@@ -44,6 +59,7 @@ async def update_room(roomInput: Room):
         area=roomInput.area,
         max_people=roomInput.max_people,
         status=roomInput.status,
+        house_id=roomInput.house_id,
     ).where(room.c.ID == roomInput.id))
     conn.commit()
     status_code = HTTP_STATUS_CODE.OK
