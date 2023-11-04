@@ -22,4 +22,4 @@ async def login(user_credentials: Login):
 
     status_code = HTTP_STATUS_CODE.OK
     status_message = HTTP_STATUS_CODE.responses[status_code]
-    return ResponseObject(True, status_code, status_message, "Login Successful")
+    return ResponseObject(True, status_code, status_message, user.role)

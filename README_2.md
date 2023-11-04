@@ -11,7 +11,9 @@
 
 <p align="center">
   <a href="#key-features">Key Features</a> •
-  <a href="#how-to-use">How To Use</a>
+  <a href="#implementation">Implementation</a> •
+  <a href="#how-to-use">Credit</a> •
+  <a href="#license">License</a>
 </p>
 
 ## Key Features
@@ -32,7 +34,7 @@
 
 * Enhanced User Experience: The project aims to enhance the experience for both tenants and landlords by offering a user-friendly and informative platform.
 
-## How To Use
+## Implementation
 
 To clone and run this application, you'll need [Git](https://git-scm.com) and [Visual Studio Code](https://code.visualstudio.com/Download). From your command line:
 
@@ -70,9 +72,11 @@ $ uvicorn index:app --reload
 
 ## Credits
 
-This software uses the following open source packages:
+This software uses the following apps and languages:
 
 - [Android Studio](https://developer.android.com/studio?gclid=CjwKCAjwkY2qBhBDEiwAoQXK5YxBU6GZ_EKcr7UYDvFr6qT8GPsXA940Sdm9NE0ynprv5zuwcvC_jxoCL0AQAvD_BwE&gclsrc=aw.ds)
+- [Java](https://www.java.com/en/)
+- [API Services](host/smartboardinghouse.me/api)
 
 
 ## License
