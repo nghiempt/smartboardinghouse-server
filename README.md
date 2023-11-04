@@ -40,7 +40,7 @@ To clone and run this application, you'll need [Git](https://git-scm.com) and [V
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/nghiempt/smartboardinghouse-app.git
+$ git clone https://github.com/nghiempt/smartboardinghouse-apis.git
 ```
 
 
