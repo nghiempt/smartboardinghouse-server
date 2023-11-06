@@ -7,7 +7,7 @@ transaction = Table(
     Column('ID', Integer, primary_key=True, autoincrement=True),
     Column('status', Integer),
     Column('date', Date),
-    Column('type', String(255)),
+    Column('content', String(255)),
     Column('total', Float),
     Column('account_profile_ID', Integer, ForeignKey('sbh_apis_account_profile.id', onupdate='CASCADE'))
 )

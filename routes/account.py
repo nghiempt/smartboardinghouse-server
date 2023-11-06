@@ -27,6 +27,7 @@ async def create_account(accountInput: Account):
         password=accountInput.password,
         role=accountInput.role,
         key=accountInput.key,
+        room_id=accountInput.room_id,
     ))
     conn.commit()
     status_code = HTTP_STATUS_CODE.OK
@@ -41,6 +42,7 @@ async def update_account(id: int, accountInput: Account):
         password=accountInput.password,
         role=accountInput.role,
         key=accountInput.key,
+        room_id=accountInput.room_id,
     ).where(account.c.id == id))
     conn.commit()
     status_code = HTTP_STATUS_CODE.OK

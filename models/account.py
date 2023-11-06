@@ -1,4 +1,4 @@
-from sqlalchemy import Table, Column
+from sqlalchemy import Table, Column, ForeignKey
 from sqlalchemy.sql.sqltypes import Integer, String
 from config.db import meta,engine
 
@@ -9,4 +9,5 @@ account = Table(
     Column('password', String(255)),
     Column('role', Integer),
     Column('key', String(255)),
+    Column('room_id', Integer, ForeignKey('sbh_apis_room.ID'))
 )

@@ -44,7 +44,7 @@ async def update_boarding_house(id: int, house: House):
     status_message = HTTP_STATUS_CODE.responses[status_code]
     return ResponseObject(True, status_code, status_message, House.serializeList(conn.execute(boarding_house.select().where(boarding_house.c.ID == id)).fetchall()))
 
-@houseRouter.get('/house/filter')
+@houseRouter.get('/house/filter/')
 async def get_houses_by_accountID(account_id: int = Query(..., description="Account ID to filter houses")):
     # Query the database to get houses that match the specified account_id
     houses = conn.execute(boarding_house.select().where(boarding_house.c.account_id == account_id)).fetchall()
@@ -76,3 +76,8 @@ async def create_boarding_house(house: House):
     status_code = HTTP_STATUS_CODE.CREATED
     status_message = HTTP_STATUS_CODE.responses[status_code]
     return ResponseObject(True, status_code, status_message, House.serializeList(conn.execute(boarding_house.select().where(boarding_house.c.account_id == house.account_id)).fetchall()))
+
+@houseRouter.get('/house/group_message')
+async def get_house_by_group_message():
+        list = []
+        return ResponseObject(True, 200, "OK", list)

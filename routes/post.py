@@ -18,6 +18,8 @@ async def create_post(postInput: Post):
         title=postInput.title,
         content=postInput.content,
         location=postInput.location,
+        lat=postInput.lat,
+        long=postInput.long,
         image=postInput.image,
         account_id=postInput.account_id,  
     ))
