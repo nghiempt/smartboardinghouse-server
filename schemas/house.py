@@ -56,4 +56,4 @@ class House(BaseModel):
             }
             result.append(house_dict)
 
-        return {'list_of_house': result, 'number_of_house': len(house_list)}
+        return result
