@@ -21,12 +21,12 @@ async def create_post(postInput: Post):
         lat=postInput.lat,
         long=postInput.long,
         image=postInput.image,
-        account_id=postInput.account_id,  
+        account_ID=postInput.account_ID,  
     ))
     conn.commit()
     status_code = HTTP_STATUS_CODE.OK
     status_message = HTTP_STATUS_CODE.responses[status_code]
-    return ResponseObject(True, status_code, status_message, Post.serializeList(conn.execute(post.select().where(post.c.account_id == postInput.account_id)).fetchall()))
+    return ResponseObject(True, status_code, status_message, Post.serializeList(conn.execute(post.select().where(post.c.account_ID == postInput.account_ID)).fetchall()))
 
 @postRouter.get('/post/filter')
 async def filter_posts_by_location(location: str = Query(..., description="Location to filter posts")):

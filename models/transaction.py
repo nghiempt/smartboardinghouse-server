@@ -9,5 +9,5 @@ transaction = Table(
     Column('date', Date),
     Column('content', String(255)),
     Column('total', Float),
-    Column('account_profile_ID', Integer, ForeignKey('sbh_apis_account_profile.id', onupdate='CASCADE'))
+    Column('account_ID', Integer, ForeignKey('sbh_apis_account.ID', onupdate='CASCADE'))
 )

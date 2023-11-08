@@ -7,10 +7,12 @@ boarding_house = Table(
     Column('ID', Integer, primary_key=True, autoincrement=True),
     Column('name', String(255)),
     Column('number_of_rooms', Integer),
+    Column('lat', String(255)),
+    Column('lng', String(255)),
     Column('province', String(255)),
     Column('district', String(255)),
     Column('ward', String(255)),
     Column('phone_number', String(255)),
-    Column('price', Integer),
-    Column('account_id', Integer, ForeignKey('sbh_apis_account.id'))
+    Column('price_range', String(255)),
+    Column('account_ID', Integer, ForeignKey('sbh_apis_account.ID'))
 )

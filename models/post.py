@@ -8,8 +8,6 @@ post = Table(
     Column('title', String(255)),
     Column('content', String(255)),
     Column('location', String(255)),
-    Column('lat', Float),
-    Column('long', Float),
     Column('image', String(255)),
-    Column('account_id', Integer, ForeignKey('sbh_apis_account.id')),
+    Column('account_ID', Integer, ForeignKey('sbh_apis_account.ID')),
 )

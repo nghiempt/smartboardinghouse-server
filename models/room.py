@@ -1,5 +1,5 @@
 from sqlalchemy import Table, Column, ForeignKey
-from sqlalchemy.sql.sqltypes import Integer, Float
+from sqlalchemy.sql.sqltypes import Integer, Float, String
 from config.db import meta
 
 room = Table(
@@ -9,5 +9,7 @@ room = Table(
     Column('area', Float),
     Column('max_people', Integer),
     Column('status', Integer),
-    Column('house_id', Integer, ForeignKey('sbh_apis_boarding_house.ID'))
+    Column('contract', String(255)),
+    Column('price', Integer),
+    Column('house_ID', Integer, ForeignKey('sbh_apis_boarding_house.ID'))
 )

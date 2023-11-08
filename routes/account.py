@@ -13,11 +13,11 @@ async def get_all_account():
     return ResponseObject(True, status_code, status_message, Account.serializeList(conn.execute(account.select()).fetchall()))
 
 
-@accountRouter.get('/{id}')
-async def get_one_account(id: int):
+@accountRouter.get('/{ID}')
+async def get_one_account(ID: int):
     status_code = HTTP_STATUS_CODE.OK
     status_message = HTTP_STATUS_CODE.responses[status_code]
-    return ResponseObject(True, status_code, status_message, Account.serializeDict(conn.execute(account.select().where(account.c.id == id)).fetchone()))
+    return ResponseObject(True, status_code, status_message, Account.serializeDict(conn.execute(account.select().where(account.c.ID == ID)).fetchone()))
 
 
 @accountRouter.post('/')
@@ -27,7 +27,7 @@ async def create_account(accountInput: Account):
         password=accountInput.password,
         role=accountInput.role,
         key=accountInput.key,
-        room_id=accountInput.room_id,
+        room_ID=accountInput.room_ID,
     ))
     conn.commit()
     status_code = HTTP_STATUS_CODE.OK
@@ -35,24 +35,24 @@ async def create_account(accountInput: Account):
     return ResponseObject(True, status_code, status_message, Account.serializeList(conn.execute(account.select()).fetchall()))
 
 
-@accountRouter.put('/{id}')
-async def update_account(id: int, accountInput: Account):
+@accountRouter.put('/{ID}')
+async def update_account(ID: int, accountInput: Account):
     conn.execute(account.update().values(
         username=accountInput.username,
         password=accountInput.password,
         role=accountInput.role,
         key=accountInput.key,
-        room_id=accountInput.room_id,
-    ).where(account.c.id == id))
+        room_ID=accountInput.room_ID,
+    ).where(account.c.ID == ID))
     conn.commit()
     status_code = HTTP_STATUS_CODE.OK
     status_message = HTTP_STATUS_CODE.responses[status_code]
     return ResponseObject(True, status_code, status_message, Account.serializeList(conn.execute(account.select()).fetchall()))
 
 
-@accountRouter.delete('/{id}')
-async def delete_account(id: int):
-    conn.execute(account.delete().where(account.c.id == id))
+@accountRouter.delete('/{ID}')
+async def delete_account(ID: int):
+    conn.execute(account.delete().where(account.c.ID == ID))
     conn.commit()
     status_code = HTTP_STATUS_CODE.OK
     status_message = HTTP_STATUS_CODE.responses[status_code]

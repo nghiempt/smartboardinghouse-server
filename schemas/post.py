@@ -5,18 +5,16 @@ class Post(BaseModel):
     content: str
     image: str
     location: str
-    lat: float
-    long: float
-    account_id: int
+    account_ID: int
 
     def serializeList(list):
         # Define keys for your dictionary
-        keys = ['ID', 'title', 'content', 'location', 'lat', 'long', 'image', 'account_id']
+        keys = ['ID', 'title', 'content', 'location', 'image', 'account_ID']
 
         # Convert the list of tuples into a list of dictionaries
         result = [dict(zip(keys, values)) for values in list]
         return result
     
     def serializeDict(values) -> dict:
-        keys = ['ID', 'title', 'content', 'location', 'lat', 'long', 'image', 'account_id']
+        keys = ['ID', 'title', 'content', 'location', 'image', 'account_ID']
         return dict(zip(keys, values))

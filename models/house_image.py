@@ -4,6 +4,6 @@ from config.db import meta, engine
 
 house_image = Table(
     'sbh_apis_house_image', meta,
-    Column('house_id', Integer, ForeignKey('sbh_apis_boarding_house.ID', ondelete='CASCADE', onupdate='CASCADE')),
+    Column('house_ID', Integer, ForeignKey('sbh_apis_boarding_house.ID', ondelete='CASCADE', onupdate='CASCADE')),
     Column('link', String(255))
 )
