@@ -51,7 +51,7 @@ class House(BaseModel):
                 'district': house[6],
                 'ward': house[7],
                 'phone_number': house[8],
-                'price': house[9],
+                'price_range': house[9],
                 'account_ID': house[10]
             }
             result.append(house_dict)

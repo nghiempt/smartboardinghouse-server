@@ -10,9 +10,9 @@ from starlette.responses import FileResponse
 roomRouter = APIRouter(prefix="/api/v1")
 
 @roomRouter.get('/room/detail/{ID}')
-async def get_room_by_ID(room_ID: int):
+async def get_room_by_ID(ID: int):
     # Query the database to get rooms that match the specified room_ID
-    room_return = conn.execute(room.select().where(room.c.ID == room_ID)).fetchone()
+    room_return = conn.execute(room.select().where(room.c.ID == ID)).fetchone()
 
     status_code = HTTP_STATUS_CODE.OK
     status_message = HTTP_STATUS_CODE.responses[status_code]
@@ -22,7 +22,7 @@ async def get_room_by_ID(room_ID: int):
         status_message = HTTP_STATUS_CODE.responses[status_code]
         return ResponseObject(False,status_code, status_message, "No room found")
 
-    return ResponseObject(True, status_code, status_message, Room.serializeDict(room_return))
+    return ResponseObject(True, status_code, status_message, Room.serializeWithAccount([room_return]))
 
 @roomRouter.get('/room/', summary="Get rooms by house ID")
 async def get_rooms_by_houseID(house_ID: int = Query(..., description="House ID to filter rooms")):
@@ -55,12 +55,19 @@ async def create_room(roomInput: Room):
     return ResponseObject(True, status_code, status_message, Room.serializeList(conn.execute(room.select().where(room.c.house_ID == roomInput.house_ID)).fetchall()))
 
 @roomRouter.get('/room/contract/{ID}')
-async def get_room_contract(room_ID: int):
-    # Provide the path to the local PDF file
-    pdf_file_path = "/Users/nguyennhathung/sbh-apis/SWD392_Group01_SE1607.pdf"
+async def get_room_contract(ID: int):
+    room_return = conn.execute(room.select().where(room.c.ID == ID)).fetchone()
+
+    status_code = HTTP_STATUS_CODE.OK
+    status_message = HTTP_STATUS_CODE.responses[status_code]
+
+    if not room_return:
+        status_code = HTTP_STATUS_CODE.NOT_FOUND
+        status_message = HTTP_STATUS_CODE.responses[status_code]
+        return ResponseObject(False,status_code, status_message, "No room found")
 
     # Return the PDF file as a response
-    return {'link': 'https://scontent.fsgn2-6.fna.fbcdn.net/v/t39.30808-6/387818871_1061855458349455_3372460615939843759_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=5f2048&_nc_ohc=QxOJCKBwkXEAX_AOqeA&_nc_oc=AQk7KnJrMWvQCCsf491Focem_WrYgG2GP8hxny_3GEyDnFwsByYB7TerR0YXM2ZvMeo&_nc_ht=scontent.fsgn2-6.fna&oh=00_AfAuH8K-1uVyskO3EPaVl_ZnK6VPT1Zeg1GYIhAXA4_iMg&oe=65508A46'}
+    return ResponseObject(True, status_code, status_message, room_return[5])
 
 # Function to hash the password using MD5
 def md5_hash_password(password):
