@@ -11,14 +11,14 @@ async def create_transaction(transaction_input: Transaction):
     conn.execute(transaction.insert().values(
         status = transaction_input.status,
         date = transaction_input.date,
-        type = transaction_input.type,
+        content = transaction_input.content,
         total = transaction_input.total,
-        account_profile_ID = transaction_input.account_profile_ID
+        account_ID = transaction_input.account_ID
     ))
     conn.commit()
     status_code = HTTP_STATUS_CODE.CREATED
     status_message = HTTP_STATUS_CODE.responses[status_code]
-    return ResponseObject(True, status_code, status_message, Transaction.serializeList(conn.execute(transaction.select().where(transaction.c.account_profile_ID == transaction_input.account_profile_ID)).fetchall()))
+    return ResponseObject(True, status_code, status_message, Transaction.serializeList(conn.execute(transaction.select().where(transaction.c.account_ID == transaction_input.account_ID)).fetchall()))
 
 @transactionRouter.get('/transaction/detail/{ID}')
 async def get_transaction_by_ID(ID: int):
