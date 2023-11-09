@@ -41,3 +41,12 @@ async def get_transactions_by_accountID(account_ID: int):
         return ResponseObject(False,status_code, status_message, "No transactions found")
 
     return ResponseObject(True, status_code, status_message, Transaction.serializeList(transactions))
+
+@transactionRouter.put('/transaction/payment/{ID}')
+async def update_transaction_status(ID: int):
+    # Update a transaction in the database
+    conn.execute(transaction.update().where(transaction.c.ID == ID).values(status = 1))
+    conn.commit()
+    status_code = HTTP_STATUS_CODE.OK
+    status_message = HTTP_STATUS_CODE.responses[status_code]
+    return ResponseObject(True, status_code, status_message, Transaction.serializeDict(conn.execute(transaction.select().where(transaction.c.ID == ID)).fetchone()))
